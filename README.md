@@ -8,6 +8,9 @@ The silva-survey program takes as input any taxanomically-derived name that woul
 
 With the SILVA database and any taxanomic name as input, the program will output a csv file for each SILVA entry that matched the inputted name: output will include the sequence header, isolation source, literature reference for the sequence, and the RNA nucleotide sequence of the gene.
 
-...
-sample
-...
+SAMPLE USAGE:
+
+    python3 silva-survey.py -taxa Zetaproteobacteria -silva_DB /Path/to/SILVA/SILVA_132_SSUParc_tax_silva.fasta -out_dir /Path/to/output/
+
+
+The only dependency for this program is python3
