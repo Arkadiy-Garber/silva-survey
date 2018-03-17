@@ -6,3 +6,8 @@ The latest release of the SILVA database of candidate small-subunit (SSU) 16S rR
 The silva-survey program takes as input any taxanomically-derived name that would be found in a SILVA sequence header. This name could be at any taxanomic level, as specific as "Shewanella" and as broad as "Bacteria". The second required input is the SILVA database, which can be downloaded from https://www.arb-silva.de/no_cache/download/archive/current/Exports/. The file you want is "SILVA_132_SSUParc_tax_silva.fasta.gz". In the next release, the 132 in SILVA_132_SSU... will be replaced with 133.
 
 
+With the SILVA database and any taxanomic name as input, the program will output a csv file for each SILVA entry that matched the inputted name: output will include the sequence header, isolation source, literature reference for the sequence, and the RNA nucleotide sequence of the gene.
+
+...
+sample
+...
