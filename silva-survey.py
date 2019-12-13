@@ -75,39 +75,38 @@ outfile = open(args.out_dir + "/" + args.taxa + "_SILVA.csv", "w")
 outfile.write(args.taxa + "_strain" + "," + "Source" + "," + "Reference" + "," + "16S_seq" + "\n")
 
 for i in silva.keys():
-    if re.match(r'>', i):
-        if re.findall(args.taxa, i):
-            time.sleep(5)
-            print(i.rstrip())
-            outfile.write(i + ",")
-            id = i.split(" ")[0]
-            id = id.split(".")[0]
-            fp = urllib.request.urlopen("https://www.ebi.ac.uk/ena/data/view/%s&display=text" % id, context=gcontext)
-            mybytes = fp.read()
-            mystr = mybytes.decode("utf8")
-            fp.close()
-            lines = mystr.split('\n')
-            string = ''
-            count = 0
-            ref = ''
-            for j in lines:
-                if re.findall(r'isolation_source', j) or re.findall(r'tissue_type', j) or \
-                        re.findall(r'Source of Isolate', j):
-                    count += 1
-                    try:
-                        string = j.split("\"")[1]
-                        string = replace(string, [","], ";")
-                    except IndexError:
-                        string = j
-                        string = replace(j, [","], ";")
-                    count += 1
-                if re.match(r'^RT', j) and len(j) > 6:
-                    ref += j
-            if count == 0:
-                outfile.write("No_data" + ",")
-            else:
-                outfile.write(replace(string, [","], ";") + ",")
-            ref = (replace(ref, [","], ";"))
-            ref = remove(ref, ["RT"])
-            outfile.write(ref + ",")
-            outfile.write(silva[i] + "\n")
+    if re.findall(args.taxa, i):
+        time.sleep(5)
+        print(i.rstrip())
+        outfile.write(i + ",")
+        id = i.split(" ")[0]
+        id = id.split(".")[0]
+        fp = urllib.request.urlopen("https://www.ebi.ac.uk/ena/data/view/%s&display=text" % id, context=gcontext)
+        mybytes = fp.read()
+        mystr = mybytes.decode("utf8")
+        fp.close()
+        lines = mystr.split('\n')
+        string = ''
+        count = 0
+        ref = ''
+        for j in lines:
+            if re.findall(r'isolation_source', j) or re.findall(r'tissue_type', j) or \
+                    re.findall(r'Source of Isolate', j):
+                count += 1
+                try:
+                    string = j.split("\"")[1]
+                    string = replace(string, [","], ";")
+                except IndexError:
+                    string = j
+                    string = replace(j, [","], ";")
+                count += 1
+            if re.match(r'^RT', j) and len(j) > 6:
+                ref += j
+        if count == 0:
+            outfile.write("No_data" + ",")
+        else:
+            outfile.write(replace(string, [","], ";") + ",")
+        ref = (replace(ref, [","], ";"))
+        ref = remove(ref, ["RT"])
+        outfile.write(ref + ",")
+        outfile.write(silva[i] + "\n")
