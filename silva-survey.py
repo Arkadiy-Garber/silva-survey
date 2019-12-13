@@ -76,7 +76,7 @@ outfile.write(args.taxa + "_strain" + "," + "Source" + "," + "Reference" + "," +
 
 for i in silva.keys():
     if re.findall(args.taxa, i):
-        time.sleep(5)
+        time.sleep(2)
         print(i.rstrip())
         outfile.write(i + ",")
         id = i.split(" ")[0]
